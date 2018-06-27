@@ -1,0 +1,1 @@
+C:\Users\%USERNAME%\AppData\Roaming\Mist\binaries\Geth\unpacked\geth --dev --ipcpath test-net/geth.ipc --datadir test-data --networkid 1234 --rpc --rpccorsdomain "*" --rpcport 8545 --rpcapi "admin,db,eth,miner,net,txpool,personal,web3" --targetgaslimit "9000000000000" console

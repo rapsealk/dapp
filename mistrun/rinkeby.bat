@@ -1,0 +1,1 @@
+geth --rinkeby --datadir="D:\Ethereum\.rinkeby" --ipcpath rinkeby/geth.ipc --rpc --rpcapi db,eth,net,web3,personal,miner console
