@@ -43,7 +43,8 @@ router.post('/', upload.single('file'), async (req, res) => {
 		// await contracts.fund(account, '10');
 		// console.log('fund receipt:', receipt);
 	
-		await contracts.provideData(account, req.file.filename);
+		const receipt = await contracts.provideData(account, password='rapsealk', req.file.filename);
+		console.log('receipt:', receipt);
 
 		// console.log('receipt:', receipt);
 	}

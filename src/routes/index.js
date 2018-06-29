@@ -12,7 +12,7 @@ router.get('/', async function(req, res) {
 	console.log(accounts);
 
 	let account = accounts[1];
-	let amount = await Contract.getBalanceOf(account) || 0;
+	let amount = await Contract.getBalanceOf(account, password='rapsealk') || 0;
 	console.log('amount:', amount);
 
 	//let amount = await contracts.getTokenAmount(accounts[1]);

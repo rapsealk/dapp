@@ -1,25 +1,16 @@
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+// const web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/EcBohFQTnBqLW6ExBeXO'));
 
+const ABI = require('./abi');
 const Address = require('./address');
 
-/*
-const tradeABI = require('../../truffle/build/contracts/TradeV01.json').abi;
-// const TradeContractAddress = require('../../truffle/build/contracts/TradeV01.json').networks['5777'].address;
-const TradeContract = new web3.eth.Contract(tradeABI, Address.trade);
-*/
-// const CrowdFundingABI = require('../../truffle/build/contracts/CrowdFunding.json').abi;
-const CrowdFundingABI = [ { "constant": false, "inputs": [], "name": "checkGoalReached", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "ended", "outputs": [ { "name": "", "type": "bool", "value": false } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "numInvestors", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalAmount", "outputs": [ { "name": "", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "status", "outputs": [ { "name": "", "type": "string", "value": "Funding" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "goalAmount", "outputs": [ { "name": "", "type": "uint256", "value": "1000" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "deadline", "outputs": [ { "name": "", "type": "uint256", "value": "5130040841" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "uint256" } ], "name": "investors", "outputs": [ { "name": "addr", "type": "address", "value": "0x0000000000000000000000000000000000000000" }, { "name": "amount", "type": "uint256", "value": "0" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "kill", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address", "value": "0xe5068b6a337963fefabdda6ffa158b9df384ef1b" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "fund", "outputs": [], "payable": true, "stateMutability": "payable", "type": "function" }, { "inputs": [ { "name": "_duration", "type": "uint256", "index": 0, "typeShort": "uint", "bits": "256", "displayName": "&thinsp;<span class=\"punctuation\">_</span>&thinsp;duration", "template": "elements_input_uint", "value": "3600000000" }, { "name": "_goalAmount", "type": "uint256", "index": 1, "typeShort": "uint", "bits": "256", "displayName": "&thinsp;<span class=\"punctuation\">_</span>&thinsp;goal Amount", "template": "elements_input_uint", "value": "1000" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" } ];
-const CrowdFundingAddress = '0x2cF3d9d7EefC82d78a2D7eA803E5b1298F815355';
-// const CrowdFundingContract = new web3.eth.Contract(CrowdFundingABI, '0x6F228f31075041FE3e7386e90b267C6912ACC68D');
-const CrowdFundingContract = new web3.eth.Contract(CrowdFundingABI, CrowdFundingAddress);
-/*
-// console.log('Trade Address from ABI:', TradeContractAddress);
-console.log('Trade Address from Deploy:', Address.trade);
-*/
+const tokenABI = ABI.Token;
+const tokenAddress = Address.Token;
+const TokenContract = new web3.eth.Contract(tokenABI, tokenAddress);
 
-const tradeABI = [ { "constant": false, "inputs": [], "name": "provideData", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [ { "name": "_address", "type": "address" } ], "name": "getTokenBalanceByAddress", "outputs": [ { "name": "", "type": "uint256" } ], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "tokenReward", "outputs": [ { "name": "", "type": "address", "value": "0x6f228f31075041fe3e7386e90b267c6912acc68d" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [ { "name": "", "type": "address" }, { "name": "", "type": "uint256" } ], "name": "history", "outputs": [ { "name": "", "type": "bytes" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [ { "name": "", "type": "address", "value": "0xe5068b6a337963fefabdda6ffa158b9df384ef1b" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "getHistory", "outputs": [ { "name": "", "type": "bytes" } ], "payable": false, "stateMutability": "view", "type": "function" }, { "inputs": [ { "name": "tokenAddress", "type": "address", "index": 0, "typeShort": "address", "bits": "", "displayName": "token Address", "template": "elements_input_address", "value": "0x6f228f31075041fe3e7386e90b267c6912acc68d" } ], "payable": false, "stateMutability": "nonpayable", "type": "constructor" } ];
-const tradeAddress = '0x32cb3408b1518a9AF37a0Fce7edf0799D2d19dCb';
+const tradeABI = ABI.Trade;
+const tradeAddress = Address.Trade;
 const TradeContract = new web3.eth.Contract(tradeABI, tradeAddress);
 
 /* Event WebSocket
@@ -63,13 +54,8 @@ exports.pollingTransaction = id => {
 exports.getAccounts = async () => {
 	return await web3.eth.getAccounts();
 };
-
+/*
 exports.fund = async (from, password, value) => {
-	//const methods = await CrowdFundingContract.methods;
-	//console.log('methods:', methods);
-	//console.log('methods.fund():', methods.fund());
-	// const instance = await CrowdFundingContract.deployed();
-	// console.log('instance:', instance);
 	await web3.eth.personal.unlockAccount(from, password);
 	CrowdFundingContract.methods.fund().send({
 		from: from,
@@ -82,7 +68,7 @@ exports.fund = async (from, password, value) => {
 		})
 		.catch(error => console.error);
 };
-
+*/
 exports.getBalanceOf = async (address, password) => {
 	// let instance = await TokenContract.deployed();
 	try {
@@ -112,11 +98,12 @@ exports.getBalanceOf = async (address, password) => {
 exports.provideData = async (address, password, data, value='10') => {
 	try {
 		await web3.eth.personal.unlockAccount(address, password);
-		await TradeContract.methods.provideData().send({
+		await TradeContract.methods.provideData(web3.utils.stringToHex(data).toString(0, 32)).send({
 			from: address,
-			value: web3.utils.toWei(value, 'ether'),
-			gas: web3.utils.toWei('8000000000000', 'wei'), // 65395990,
-			data: web3.utils.stringToHex(data)
+			// value: web3.utils.toWei(value, 'ether'),
+			gas: web3.utils.toWei('1000000', 'wei'),
+			//gas: web3.utils.toWei('700000', 'wei'), // web3.utils.toWei('8000000000000', 'wei'), // 65395990,
+			// data: web3.utils.stringToHex(data) // web3.utils.stringToHex(data)
 		});
 	}
 	catch (error) {

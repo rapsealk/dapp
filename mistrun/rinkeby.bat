@@ -1,1 +1,1 @@
-geth --rinkeby --datadir="D:\Ethereum\.rinkeby" --ipcpath rinkeby/geth.ipc --rpc --rpcapi db,eth,net,web3,personal,miner console
+geth --rinkeby --datadir="D:\Ethereum\.rinkeby" --ipcpath rinkeby/geth.ipc --rpc --rpccorsdomain "https://rinkeby.infura.io/EcBohFQTnBqLW6ExBeXO" --rpcapi db,eth,net,web3,personal,miner console

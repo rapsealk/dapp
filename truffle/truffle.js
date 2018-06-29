@@ -10,10 +10,10 @@ module.exports = {
 		},
 		rinkeby: {
 			host: "localhost",
-			port: 7545,
+			port: 8545,
 			// from: "", // default address to use for any transaction
 			network_id: "*",
-			//gas: 4612388
+			gas: 4612388
 		}
 	}
 };
