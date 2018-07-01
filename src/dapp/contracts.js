@@ -2,16 +2,20 @@ const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 // const web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/EcBohFQTnBqLW6ExBeXO'));
 
-const ABI = require('./abi');
-const Address = require('./address');
+// const ABI = require('./abi');
+// const Address = require('./address');
 
-const tokenABI = ABI.Token;
-const tokenAddress = Address.Token;
-const TokenContract = new web3.eth.Contract(tokenABI, tokenAddress);
+const Trade = require('../../truffle/build/contracts/Trade.json');
+const Token = require('../../truffle/build/contracts/Token.json');
+const NetworkId = '1234';
 
-const tradeABI = ABI.Trade;
-const tradeAddress = Address.Trade;
-const TradeContract = new web3.eth.Contract(tradeABI, tradeAddress);
+const TradeABI = Trade.abi;
+const TradeAddress = Trade.networks[NetworkId].address;
+const TokenABI = Token.abi;
+const TokenAddress = Token.networks[NetworkId].address;
+
+const TradeContract = new web3.eth.Contract(TradeABI, TradeAddress);
+const TokenContract = new web3.eth.Contract(TokenABI, TokenAddress);
 
 /* Event WebSocket
 const watchTradeEvent = () => {
@@ -73,22 +77,11 @@ exports.getBalanceOf = async (address, password) => {
 	// let instance = await TokenContract.deployed();
 	try {
 		await web3.eth.personal.unlockAccount(address, password);
-		TradeContract.methods.getTokenBalanceByAddress(address).send({
-			from: address,
-			value: web3.utils.toWei('0', 'ether'),
-			gas: 5000000
-		})
-			.then((error, result) => {
-				if (error) throw error;
-				console.log(`getBalanceOf(address: ${address}): ${result}`);
-				return result;
-			})
-			.catch(error => console.error);
-		// return await TradeContract.methods.balanceOf(address).call();
+		return await TradeContract.methods.getTokenBalanceByAddress(address).call();
 	}
 	catch (error) {
 		console.error(error);
-		return 0;
+		return null;
 	}
 	finally {
 		console.log(`getBalanceOf >> address: ${address}`);
@@ -101,7 +94,7 @@ exports.provideData = async (address, password, data, value='10') => {
 		await TradeContract.methods.provideData(web3.utils.stringToHex(data).toString(0, 32)).send({
 			from: address,
 			// value: web3.utils.toWei(value, 'ether'),
-			gas: web3.utils.toWei('1000000', 'wei'),
+			gas: web3.utils.toWei('7000000', 'wei'),
 			//gas: web3.utils.toWei('700000', 'wei'), // web3.utils.toWei('8000000000000', 'wei'), // 65395990,
 			// data: web3.utils.stringToHex(data) // web3.utils.stringToHex(data)
 		});
