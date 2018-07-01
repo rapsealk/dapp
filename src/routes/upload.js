@@ -38,10 +38,6 @@ router.post('/', upload.single('file'), async (req, res) => {
 		const accounts = await contracts.getAccounts();
 	
 		const account = accounts[1];
-		// const receipt = await contracts.trade(account, '1000');
-		// const receipt = await contracts.fund(account, '7');
-		// await contracts.fund(account, '10');
-		// console.log('fund receipt:', receipt);
 	
 		const receipt = await contracts.provideData(account, password='rapsealk', req.file.filename);
 		console.log('receipt:', receipt);

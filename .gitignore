@@ -3,4 +3,3 @@ node_modules/
 src/storage/
 contracts/*.json
 test-data/
-mistrun/

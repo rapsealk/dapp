@@ -5,8 +5,12 @@ const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 // const ABI = require('./abi');
 // const Address = require('./address');
 
+//const Trade = require('../../truffle/build/contracts/TokenTrade.json');
+//const Token = require('../../truffle/build/contracts/TradeToken.json');
+
 const Trade = require('../../truffle/build/contracts/Trade.json');
 const Token = require('../../truffle/build/contracts/Token.json');
+
 const NetworkId = '1234';
 
 const TradeABI = Trade.abi;
