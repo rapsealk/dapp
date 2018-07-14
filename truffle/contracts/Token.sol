@@ -6,6 +6,8 @@ contract Token {
     string public symbol = "DATs";
     uint8 public decimals = 18;
 
+    address public owner;
+
     mapping (address => uint256) public balanceOf;
 
     event Transfer(address _from, address _to, uint256 _value);
@@ -15,18 +17,19 @@ contract Token {
     /*/
     function Token
     //*/
-    (uint256 initialSupply) public {
+    (uint256 initialSupply, address _owner) public {
+        owner = _owner; // msg.sender;
         balanceOf[msg.sender] = initialSupply;
     }
 
-    function transfer(address _to, uint256 _amount) public {
-        if (balanceOf[msg.sender] < _amount) revert();
+    function transfer(address _to, uint256 _amount) public payable {
+        if (balanceOf[owner] < _amount) revert();
         if (balanceOf[_to] + _amount < balanceOf[_to]) revert();
 
-        balanceOf[msg.sender] -= _amount;
+        balanceOf[owner] -= _amount;
         balanceOf[_to] += _amount;
 
-        emit Transfer(msg.sender, _to, _amount);
+        emit Transfer(owner, _to, _amount);
     }
 
     function getBalanceByAddress(address _address) public view returns (uint256) {

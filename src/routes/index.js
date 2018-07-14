@@ -9,8 +9,10 @@ router.get('/', async function(req, res) {
 	console.log(accounts);
 
 	let account = accounts[1];
-	let amount = await Contract.getBalanceOf(account, password='rapsealk') || -1;
+	let amount = await Contract.getBalanceOf(account, password='') || -1;
 	console.log('amount:', amount);
+
+	await Contract.getData(account, password='');
 
 	res.render('index', { account: account, amount: amount });
 });

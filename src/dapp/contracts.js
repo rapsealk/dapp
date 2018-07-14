@@ -1,5 +1,5 @@
 const Web3 = require('web3');
-const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
+const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 // const web3 = new Web3(new Web3.providers.HttpProvider('https://rinkeby.infura.io/EcBohFQTnBqLW6ExBeXO'));
 
 // const ABI = require('./abi');
@@ -11,7 +11,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 const Trade = require('../../truffle/build/contracts/Trade.json');
 const Token = require('../../truffle/build/contracts/Token.json');
 
-const NetworkId = '1234';
+const NetworkId = '5777';
 
 const TradeABI = Trade.abi;
 const TradeAddress = Trade.networks[NetworkId].address;
@@ -98,7 +98,7 @@ exports.provideData = async (address, password, data, value='10') => {
 		await TradeContract.methods.provideData(web3.utils.stringToHex(data).toString(0, 32)).send({
 			from: address,
 			// value: web3.utils.toWei(value, 'ether'),
-			gas: web3.utils.toWei('7000000', 'wei'),
+			gas: web3.utils.toWei('6000000', 'wei'),
 			//gas: web3.utils.toWei('700000', 'wei'), // web3.utils.toWei('8000000000000', 'wei'), // 65395990,
 			// data: web3.utils.stringToHex(data) // web3.utils.stringToHex(data)
 		});
@@ -108,6 +108,20 @@ exports.provideData = async (address, password, data, value='10') => {
 	}
 	finally {
 		console.log(`provideData >> data: ${data}`);
+	}
+};
+
+exports.getData = async (address, password) => {
+	try {
+		await web3.eth.personal.unlockAccount(address, password);
+		const data = await TradeContract.methods.getData().send({
+			from: address,
+			gas: web3.utils.toWei('6000000', 'wei'),
+		});
+		console.log('data:', data);
+	}
+	catch (error) {
+		console.error(error);
 	}
 };
 
